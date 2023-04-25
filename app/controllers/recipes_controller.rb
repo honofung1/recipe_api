@@ -8,6 +8,9 @@ class RecipesController < ApplicationController
   end
 
   def create
+    new_recipe_params = recipe_params.dig(:recipe)
+    puts new_recipe_params
+    puts "0000000000"
     recipe = Recipe.new(recipe_params)
     if recipe.save
       render json: { message: "Recipe successfully created!", recipe: [recipe] }
