@@ -8,10 +8,7 @@ class RecipesController < ApplicationController
   end
 
   def create
-    new_recipe_params = recipe_params.dig(:recipe)
-    puts new_recipe_params
-    puts "0000000000"
-    recipe = Recipe.new(recipe_params)
+    recipe = Recipe.new(create_recipe_params)
     if recipe.save
       render json: { message: "Recipe successfully created!", recipe: [recipe] }
     else
@@ -51,5 +48,9 @@ class RecipesController < ApplicationController
 
   def recipe_params
     params.require(:recipe).permit(:title, :making_time, :serves, :ingredients, :cost)
+  end
+
+  def create_recipe_params
+    params.permit(:title, :making_time, :serves, :ingredients, :cost)
   end
 end
